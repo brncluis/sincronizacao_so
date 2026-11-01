@@ -1,0 +1,24 @@
+Script started on 2026-11-01 13:25:48-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="145" LINES="19"]
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[00m$ oi teste
+[?2004l]133;C\]666;vte.shell.preexec!\oi: command not found
+]666;vte.shell.postexec=127\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[00m$ exit
+[?2004l]133;C\]666;vte.shell.preexec!\exit
+
+Script done on 2026-11-01 13:26:06-03:00 [COMMAND_EXIT_CODE="127"]
+Script started on 2026-11-01 13:26:26-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="145" LINES="19"]
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[00m$ lhass/
+[?2004l]133;C\]666;vte.shell.preexec!\bash: lhass/: Is a directory
+]666;vte.shell.postexec=126\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so[00m$ cd lhass/
+[?2004l]133;C\]666;vte.shell.preexec!\]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ teste
+[?2004l]133;C\]666;vte.shell.preexec!\Command 'teste' not found, did you mean:
+  command 'tests' from deb go-bluetooth (5.60-3build2)
+  command 'testr' from deb python3-testrepository (0.0.21-4)
+  command 'test' from deb coreutils-from-gnu (0.0.0~ubuntu25)
+  command 'test' from deb coreutils-from-uutils (0.0.0~ubuntu25)
+  command 'test' from deb coreutils-from-busybox (0.0.0~ubuntu25)
+  command 'test' from deb coreutils-from-toybox (0.0.0~ubuntu25)
+Try: sudo apt install <deb name>
+]666;vte.shell.postexec=127\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ exit
+[?2004l]133;C\]666;vte.shell.preexec!\exit
+
+Script done on 2026-11-01 13:26:45-03:00 [COMMAND_EXIT_CODE="127"]
