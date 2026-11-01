@@ -69,3 +69,27 @@ To https://github.com/brncluis/sincronizacao_so.git
 [?2004l]133;C\]666;vte.shell.preexec!\Script started, output log file is 'evidencias.log'.
 ]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ 
 Script done on 2026-11-01 13:39:46-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-01 15:17:04-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="145" LINES="19"]
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ make clean
+[?2004lrm -f sync_car *.o
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o sync_car sync_car.c sync_car-runner.c
+[01m[Ksync_car-runner.c:[m[K In function ‘[01m[Kalarm_handler[m[K’:
+[01m[Ksync_car-runner.c:54:24:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kfoo[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-parameter-Wunused-parameter]8;;[m[K]
+   54 | void alarm_handler([01;35m[Kint foo[m[K)
+      |                    [01;35m[K~~~~^~~[m[K
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ ./sync_car 
+[?2004lcar entering station with 46 free seats
+car departed station with 46 new passenger(s) (expected 46)
+car entering station with 34 free seats
+car departed station with 34 new passenger(s) (expected 34)
+car entering station with 28 free seats
+car departed station with 20 new passenger(s) (expected 20)
+Looks good!
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ make clean
+[?2004lrm -f sync_car *.o
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-01 15:17:19-03:00 [COMMAND_EXIT_CODE="0"]
