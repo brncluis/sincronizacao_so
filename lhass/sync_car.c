@@ -43,3 +43,21 @@ void station_wait_for_car(struct station *station) {
     pthread_mutex_unlock(&station->mutex);
 
 }
+
+void station_load_car(struct station *station, int count) {
+
+    pthread_mutex_lock(&station->mutex);
+
+    station->assentos_livres = count;
+
+    pthread_cond_broadcast(&station->cond_chegou_carro);
+
+    while ((station->assentos_livres > 0 && station->esperando > 0) || station->em_transito > 0) {
+        pthread_cond_wait(&station->cond_todos_sentados, &station->mutex);
+    }
+
+    station->assentos_livres = 0;
+
+    pthread_mutex_unlock(&station->mutex);
+
+}
