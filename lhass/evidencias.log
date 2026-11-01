@@ -22,3 +22,50 @@ Try: sudo apt install <deb name>
 [?2004l]133;C\]666;vte.shell.preexec!\exit
 
 Script done on 2026-11-01 13:26:45-03:00 [COMMAND_EXIT_CODE="127"]
+Script started on 2026-11-01 13:27:02-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="145" LINES="19"]
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ >s[K scryb[K[K[K[Kync_car-runner.c [K[Kh
+[?2004l]133;C\]666;vte.shell.preexec!\]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ cle[K[K[Kcd[K[Ksync_car-r[K[K[K[K[K[K[K[K[K[Kcd s[K[K[K[K> su[Kync_car.c
+[?2004l]133;C\]666;vte.shell.preexec!\]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ cat sun[K[Kync_car.c 
+[?2004l]133;C\]666;vte.shell.preexec!\#include "sync_car.h"
+
+void station_init(struct station *station){
+
+    station->assentos_livres = 0;
+    station->em_transito = 0;
+    station->esperando = 0;
+
+    pthread_mutex_init(&station->mutex, NULL);
+
+    pthread_mutex_init(&station->mutex, NULL);              
+    pthread_cond_init(&station->cond_chegou_carro, NULL);   
+
+}
+
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ syn [Kc [K[K[K[K[Krp[K[Kfuncao de inicializacao das variaveis da struct e inicializaca[K[Kcao [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgit add .
+[?2004l]133;C\]666;vte.shell.preexec!\]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2Script started on 2026-11-01 13:36:40-03:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="145" LINES="19"]
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [?2004l
+exit
+
+Script done on 2026-11-01 13:39:44-03:00 [COMMAND_EXIT_CODE="0"]
+004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ git commit -m "add struct statiopn [K[K[Kn e station init, definica[K[Kcao das  variaveis e mutexs [K, inicializo todsos[K[K[Kos em station [K_init"
+[?2004l]133;C\]666;vte.shell.preexec!\[main 7b5754b] add struct station e station init, definicao das variaveis e mutexs, inicializo todos em station_init
+ 3 files changed, 58 insertions(+)
+ create mode 100644 lhass/evidencias.log
+ create mode 100644 lhass/sync_car.c
+ create mode 100644 lhass/sync_car.h
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ 
+[?2004l]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ git push
+[?2004l]133;C\]666;vte.shell.preexec!\Enumerating objects: 8, done.
+Counting objects:  12% (1/8)Counting objects:  25% (2/8)Counting objects:  37% (3/8)Counting objects:  50% (4/8)Counting objects:  62% (5/8)Counting objects:  75% (6/8)Counting objects:  87% (7/8)Counting objects: 100% (8/8)Counting objects: 100% (8/8), done.
+Delta compression using up to 16 threads
+Compressing objects:  16% (1/6)Compressing objects:  33% (2/6)Compressing objects:  50% (3/6)Compressing objects:  66% (4/6)Compressing objects:  83% (5/6)Compressing objects: 100% (6/6)Compressing objects: 100% (6/6), done.
+Writing objects:  16% (1/6)Writing objects:  33% (2/6)Writing objects:  50% (3/6)Writing objects:  66% (4/6)Writing objects:  83% (5/6)Writing objects: 100% (6/6)Writing objects: 100% (6/6), 1.43 KiB | 1.43 MiB/s, done.
+Total 6 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas:   0% (0/1)[Kremote: Resolving deltas: 100% (1/1)[Kremote: Resolving deltas: 100% (1/1), completed with 1 local object.[K
+To https://github.com/brncluis/sincronizacao_so.git
+   e09b79d..7b5754b  main -> main
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ gi[K[Kscript -a evidencias.log 
+[?2004l]133;C\]666;vte.shell.preexec!\Script started, output log file is 'evidencias.log'.
+]666;vte.shell.postexec=0\]7;file://luisdesktop/home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]0;brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass\]666;vte.shell.precmd!\[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ 
+Script done on 2026-11-01 13:39:46-03:00 [COMMAND_EXIT_CODE="0"]

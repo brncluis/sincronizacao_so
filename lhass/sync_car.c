@@ -12,3 +12,16 @@ void station_init(struct station *station){
 
 }
 
+void station_on_board(struct station *station) {
+
+    pthread_mutex_lock(&station->mutex);
+
+    station->em_transito--;
+
+    if (station->em_transito == 0) {
+        pthread_cond_signal(&station->cond_todos_sentados);
+    }
+
+    pthread_mutex_unlock(&station->mutex);
+    
+}
