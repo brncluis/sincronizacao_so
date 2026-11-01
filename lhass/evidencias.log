@@ -93,3 +93,170 @@ Looks good!
 [?2004lexit
 
 Script done on 2026-11-01 15:17:19-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-01 15:27:16-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="145" LINES="26"]
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [H[2J]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$  2 files changed, 31 insertions(+)
+ create mode 100644 lhass/Makefile
+brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass$ git push
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.04 KiB | 1.04 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/brncluis/sincronizacao_so.git
+   29aa0f6..1c9fd7e  main -> main
+brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass$ gcc -Wall -Wextra -pthread -fsanitize=thread -g -O1 \
+    -o sync_car_tsan sync_car.c sync_car-runner.c
+sync_car-runner.c: In function ‘alarm_handler’:
+sync_car-runner.c:54:24: warning: unused parameter ‘foo’ [-Wunused-parameter]
+   54 | void alarm_handler(int foo)
+      |                    ~~~~^~~
+brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass$ ./sync_car_tsan 2> tsan.txt; echo "código de saída: $?"
+car entering station with 22 free seats
+car departed station with 22 new passenger(s) (expected 22)
+car entering station with 12 free seats
+car departed station with 12 new passenger(s) (expected 12)
+car entering station with 19 free seats
+car departed station with 19 new passenger(s) (expected 19)
+car entering station with 30 free seats
+car departed station with 30 new passenger(s) (expected 30)
+car entering station with 21 free seats
+car departed station with 17 new passenger(s) (expected 17)
+Looks good!
+código de saída: 66
+brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass$ setarch $(uname -m) -R ./sync_car_tsan 2> tsan.txt; echo "código de saída: $?" 
+car entering station with 14 free seats
+car departed station with 14 new passenger(s) (expected 14)
+car entering station with 19 free seats
+car departed station with 19 new passenger(s) (expected 19)
+car entering station with 38 free seats
+car departed station with 38 new passenger(s) (expected 38)
+car entering station with 7 free seats
+car departed station with 7 new passenger(s) (expected 7)
+car entering station with 31 free seats
+car departed station with 22 new passenger(s) (expected 22)
+Looks good!
+código de saída: 66
+brncluis@luisdesktop:~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass$ grep -c "WARNING: ThreadSanitizer" tsan.txt
+grep -A2 -E "WARNING|by thread|by main" tsan.txt | head -60
+5
+WARNING: ThreadSanitizer: data race (pid=1118762)
+  Atomic write of size 4 at 0x555555558044 by thread T32:
+    #0 passenger_thread /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:25 (sync_car_tsan+0x17d2) (BuildId: 507524f507e036a20dca272da5ff197a13224859) 
+
+  Previous read of size 4 at 0x555555558044 by main thread:
+    #0 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:127 (sync_car_tsan+0x1ab1) (BuildId: 507524f507e036a20dca272da5ff197a13224859) 
+
+--
+  Thread T32 (tid=1118795, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b77217284deb43a0042) 
+    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:87 (sync_car_tsan+0x19c6) (BuildId: 507524f507e036a20dca272da5ff197a13224859) 
+--
+WARNING: ThreadSanitizer: data race (pid=1118762)
+  Write of size 4 at 0x555555558040 by main thread:
+    #0 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:108 (sync_car_tsan+0x1c9a) (BuildId: 507524f507e036a20dca272da5ff197a13224859) 
+
+  Previous write of size 4 at 0x555555558040 by thread T101:
+    #0 load_car_thread /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:40 (sync_car_tsan+0x181f) (BuildId: 507524f507e036a20dca272da5ff197a13224859) 
+
+--
+  Thread T101 (tid=1118864, finished) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b77217284deb43a0042) 
+    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:111 (sync_car_tsan+0x1cf5) (BuildId: 507524f507e036a20dca272da5ff197a13224859) 
+--
+WARNING: ThreadSanitizer: data race (pid=1118762)
+  Read of size 4 at 0x555555558040 by main thread:
+    #0 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:137 (sync_car_tsan+0x1d2b) (BuildId: 50752[7m4[27m[7mf507e036a20dca272da5ff197a13224859) [27m
+
+[7m  Previous write of size 4 at 0x555555558040 by thread T102:[27m
+[7m    #0 load_car_thread /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:40 (sync_car_tsan+0x181f) (Buil[27m[7md[27m[7mId: 507524f507e036a20dca272da5ff197a13224859) [27m
+
+[7m--[27m
+[7m  Thread T102 (tid=1118865, finished) created by main thread at:[27m
+[7m    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b7[27m[7m7[27m[7m217284deb43a0042) [27m
+[7m    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:111 (sync_car_tsan+0x1cf5) (BuildId: 50752[27m[7m4[27m[7mf507e036a20dca272da5ff197a13224859) [27m
+[7m--[27m
+[7mWARNING: ThreadSanitizer: thread leak (pid=1118762)[27m
+[7m  Thread T1 (tid=1118764, finished) created by main thread at:[27m
+[7m    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b7[27m[7m7[27m[7m217284deb43a0042) [27m
+[7m    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:87 (sync_car_tsan+0x19c6) (BuildId: 507524[27m[7mf[27m[7m507e036a20dca272da5ff197a13224859) [27m
+[7m--[27m
+[7mWARNING: ThreadSanitizer: thread leak (pid=1118762)[27m
+[7m  Thread T101 (tid=1118864, finished) created by main thread at:[27m
+[7m    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b7[27m[7m7[27m[7m217284deb43a0042) [27m
+[7m    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:111 (sync_car_tsan+0x1cf5) (BuildId: 50752[27m[7m4[27m[7mf507e036a20dca272da5ff197a13224859)[27m^C[?2004l[?2004h[?2004l
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ 
+[?2004l[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ 
+[?2004l[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [7mgrep -c "WARNING: ThreadSanitizer" tsan.txt[27m
+[7mgrep -A2 -E "WARNING|by thread|by main" tsan.txt | head -60[27m[A]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ grep -c "WARNING: ThreadSanitizer" tsan.txt
+grep -A2 -E "WARNING|by thread|by main" tsan.txt | head -60
+[?2004l5
+WARNING: ThreadSanitizer: data race (pid=1118762)
+  Atomic write of size 4 at 0x555555558044 by thread T32:
+    #0 passenger_thread /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:25 (sync_car_tsan+0x17d2) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+
+  Previous read of size 4 at 0x555555558044 by main thread:
+    #0 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:127 (sync_car_tsan+0x1ab1) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+
+--
+  Thread T32 (tid=1118795, running) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b77217284deb43a0042)
+    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:87 (sync_car_tsan+0x19c6) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+--
+WARNING: ThreadSanitizer: data race (pid=1118762)
+  Write of size 4 at 0x555555558040 by main thread:
+    #0 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:108 (sync_car_tsan+0x1c9a) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+
+  Previous write of size 4 at 0x555555558040 by thread T101:
+    #0 load_car_thread /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:40 (sync_car_tsan+0x181f) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+
+--
+  Thread T101 (tid=1118864, finished) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b77217284deb43a0042)
+    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:111 (sync_car_tsan+0x1cf5) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+--
+WARNING: ThreadSanitizer: data race (pid=1118762)
+  Read of size 4 at 0x555555558040 by main thread:
+    #0 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:137 (sync_car_tsan+0x1d2b) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+
+  Previous write of size 4 at 0x555555558040 by thread T102:
+    #0 load_car_thread /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:40 (sync_car_tsan+0x181f) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+
+--
+  Thread T102 (tid=1118865, finished) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b77217284deb43a0042)
+    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:111 (sync_car_tsan+0x1cf5) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+--
+WARNING: ThreadSanitizer: thread leak (pid=1118762)
+  Thread T1 (tid=1118764, finished) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b77217284deb43a0042)
+    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:87 (sync_car_tsan+0x19c6) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+--
+WARNING: ThreadSanitizer: thread leak (pid=1118762)
+  Thread T101 (tid=1118864, finished) created by main thread at:
+    #0 pthread_create ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1078 (libtsan.so.2+0x5cb02) (BuildId: 66d37dc704b813df6c813b77217284deb43a0042)
+    #1 main /home/brncluis/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass/sync_car-runner.c:111 (sync_car_tsan+0x1cf5) (BuildId: 507524f507e036a20dca272da5ff197a13224859)
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [7mok=0; falhas=0[27m
+[7mfor i in $(seq 200); do[27m
+[7m  if ./sync_car > /dev/null; then ok=$((ok+1)); else falhas=$((falhas+1)); echo "falhou na $i"; fi[27m
+[7m  [ $((i % 20)) -eq 0 ] && echo "progresso: $i/200"[27m
+[7mdone[27m
+[7mecho "ok=$ok falhas=$falhas"[27m[A[A[A[A[A]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ ok=0; falhas=0
+for i in $(seq 200); do
+  if ./sync_car > /dev/null; then ok=$((ok+1)); else falhas=$((falhas+1)); echo "falhou na $i"; fi
+  [ $((i % 20)) -eq 0 ] && echo "progresso: $i/200"
+done
+echo "ok=$ok falhas=$falhas"
+[?2004lprogresso: 20/200
+progresso: 40/200
+progresso: 60/200
+progresso: 80/200
+progresso: 100/200
+progresso: 120/200
+progresso: 140/200
+progresso: 160/200
+progresso: 180/200
+progresso: 200/200
+ok=200 falhas=0
+[?2004h]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[00m$ [K]0;brncluis@luisdesktop: ~/Projetos/ProjetoSO_1/Sincronizacao/sincronizacao_so/lhass[01;32mbrncluis@luisdesktop[00m:[01;34m~/Projetos/ProjetoSO_1/Sincronizacao/sincronizac
