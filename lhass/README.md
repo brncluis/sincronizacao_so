@@ -6,6 +6,7 @@
 - `sync_car.h`: declaração da `struct station` e dos protótipos das funções.
 - `sync_car-runner.c`: programa de teste fornecido pelo professor (sem alterações).
 - `Makefile`: compilação e limpeza.
+- `evidencias.txt`: registro do terminal com a compilação e as execuções de teste.
 
 ## Compilar
 
