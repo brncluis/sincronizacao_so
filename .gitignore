@@ -1,3 +1,4 @@
 sync_car
 *.o
 tsan.txt
+lhass.tar
